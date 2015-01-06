@@ -1,0 +1,9 @@
+<!doctype prova [
+<!element prova o o (p*)>
+<!element p - o (#pcdata)>
+]>
+
+<prova>
+<p>
+Hola aixo es una prova.</p>
+</prova>

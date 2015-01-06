@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<fot>
+<simple-page-sequence>
+<scroll>
+<paragraph>
+<a name="0"/>
+<a name="1"/>
+<text>The first paragraph.</text>
+</paragraph>
+<paragraph>
+<a name="2"/>
+<text>The second paragraph.</text>
+</paragraph>
+</scroll>
+</simple-page-sequence>
+</fot>

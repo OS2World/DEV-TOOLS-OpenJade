@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<fot>
+<page-sequence force-last-page="front" force-first-page="back" jystify-spread="true" binding-edge="right"/>
+<glyph-annotation break-before-priority="1" break-after-priority="2" annotation-glyph-placement="shouldered" annotation-glyph-style="false" inhibit-line-breaks?="true"/>
+<a name="0"/>
+<a name="1"/>
+<text>Hola aixo es una prova.</text>
+</glyph-annotation>
+</page-sequence>
+</fot>

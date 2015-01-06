@@ -1,0 +1,47 @@
+#
+#  Makefile.lib.in - Makerules for building libraries
+#
+#  $Id: Makefile.lib.in,v 1.2.4.1.2.4 2002/01/22 11:57:53 icastle Exp $
+#
+#  Copyright (C) 1998 Cees A. de Groot
+#
+
+CLEANFILES=-r lib$(LIB).la $(OBJS) $(COBJS) $(LT_OBJS) core .libs Makefile.lt
+
+top_builddir=K:/openjade/openjade-1.3.3-pre1
+LIB_THREADS=
+mkinstalldirs = $(SHELL) $(TOP)/config/mkinstalldirs
+INSTALL = ../config/install-sh -c
+INSTALL_PROGRAM = ${INSTALL} $(AM_INSTALL_PROGRAM_FLAGS)
+transform = s,x,x,
+LINKFLAGS = -Zomf -Zdll -llibstdc++.lib -llibsupc++.lib -l/usr/local/lib/osp.a 
+
+# all: lib$(LIB).la
+all: lib$(LIB).a
+pure: all
+
+Makefile.lt:
+	echo 'LT_OBJS='`echo $(OBJS)|sed 's/\.o/.lo/g'` >Makefile.lt
+
+lib$(LIB).la: $(LT_OBJS)
+	$(LIBTOOL) --mode=link $(CC) $(LINKFLAGS) -o lib$(LIB).la $(LT_OBJS) \
+	    -rpath $(libdir) -version-info $(LTVERSION) $(DEPLIBS)
+
+$(LIB).dll: $(LT_OBJS)
+	@echo LIBRARY $(LIB) > $(LIB).def
+	@echo EXPORTS >> $(LIB).def
+	emxexp $(LT_OBJS) >> $(LIB).def
+	implib $(LIB).lib $(LIB).def
+	$(CC) $(LINKFLAGS) -o $(LIB).dll $(LT_OBJS) $(LIB).def $(DEPLIBS)
+
+lib$(LIB).a: $(LT_OBJS)
+	$(AR) $(ARFLAGS) lib$(LIB).a $(LT_OBJS) 
+
+install:
+	$(mkinstalldirs) $(DESTDIR)$(libdir)
+#	$(LIBTOOL) --mode=install $(INSTALL_PROGRAM) lib$(LIB).la $(DESTDIR)$(libdir)
+	$(INSTALL_PROGRAM) lib$(LIB).a $(DESTDIR)$(libdir)
+
+depend: depend_src
+depend.temp: $(GENSRCS)
+gen: $(GENSRCS)

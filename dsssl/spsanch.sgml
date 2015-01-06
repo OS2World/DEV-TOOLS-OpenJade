@@ -1,0 +1,12 @@
+<!DOCTYPE pages [
+<!ELEMENT pages o o (texto | para | lb)*>
+<!ELEMENT texto o o (#PCDATA)>
+<!ELEMENT para - o (#PCDATA)>
+<!ELEMENT lb - - (#PCDATA)>
+]>
+
+<pages>
+ <texto>Esto es una secuencia de paginas<texto>
+ <para>Paragrafo nuevo</para> 
+ <lb></lb>
+</pages>
